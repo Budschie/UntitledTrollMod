@@ -1,0 +1,6 @@
+{
+    "parent": "untitledtrollmod:item/troll_bow",
+    "textures": {
+        "layer0": "untitledtrollmod:item/troll_bow_pulling_0"
+    }
+}
