@@ -1,5 +1,5 @@
 {
-    "parent": "item/generated",
+    "parent": "minecraft:item/generated",
     "textures": {
         "layer0": "untitledtrollmod:item/troll_bow"
     },
@@ -28,21 +28,21 @@
     "overrides": [
         {
             "predicate": {
-                "pulling": 1
+                "untitledtrollmod:pulling": 1
             },
             "model": "untitledtrollmod:item/troll_bow_pulling_0"
         },
         {
             "predicate": {
-                "pulling": 1,
-                "pull": 0.65
+                "untitledtrollmod:pulling": 1,
+                "untitledtrollmod:pull": 0.65
             },
             "model": "untitledtrollmod:item/troll_bow_pulling_1"
         },
         {
             "predicate": {
-                "pulling": 1,
-                "pull": 0.9
+                "untitledtrollmod:pulling": 1,
+                "untitledtrollmod:pull": 0.9
             },
             "model": "untitledtrollmod:item/troll_bow_pulling_2"
         }

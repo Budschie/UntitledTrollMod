@@ -3,6 +3,8 @@ package de.budschie.untitledtrollmod.items.classes;
 import java.util.function.Predicate;
 
 import de.budschie.untitledtrollmod.items.ItemRegistry;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.BowItem;
 import net.minecraft.world.item.ItemStack;
@@ -22,14 +24,30 @@ public class TrollBowItem extends BowItem
 	}
 	
 	@Override
-	public void onUseTick(Level p_41428_, LivingEntity p_41429_, ItemStack p_41430_, int remainingTicks)
+	public void onUseTick(Level level, LivingEntity livingEntity, ItemStack itemStack, int remainingTicks)
 	{
-		super.onUseTick(p_41428_, p_41429_, p_41430_, remainingTicks);
+		super.onUseTick(level, livingEntity, itemStack, remainingTicks);
 		
 		// Very funny
-		if(remainingTicks < (getUseDuration(p_41430_) - 60))
+		if(remainingTicks == (getUseDuration(itemStack) - 39))
 		{
-			p_41430_.hurtAndBreak(1, p_41429_, player -> player.broadcastBreakEvent(player.getUsedItemHand()));
+			if(level.isClientSide())
+			{
+				level.playLocalSound(livingEntity.getX(), livingEntity.getY(), livingEntity.getZ(), SoundEvents.WOOD_FALL, SoundSource.PLAYERS, 2, 2, false);
+				level.playLocalSound(livingEntity.getX(), livingEntity.getY(), livingEntity.getZ(), SoundEvents.WOOD_FALL, SoundSource.PLAYERS, 2, 1, false);
+				level.playLocalSound(livingEntity.getX(), livingEntity.getY(), livingEntity.getZ(), SoundEvents.ITEM_BREAK, SoundSource.PLAYERS, 2, 1, false);
+			}
+			
+			itemStack.hurtAndBreak(1, livingEntity, player -> 
+			{ 
+				player.broadcastBreakEvent(player.getUsedItemHand());				
+			});
 		}
+	}
+	
+	@Override
+	public int getUseDuration(ItemStack p_40680_)
+	{
+		return 40;
 	}
 }

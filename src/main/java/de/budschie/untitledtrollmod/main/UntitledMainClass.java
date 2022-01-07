@@ -3,9 +3,12 @@ package de.budschie.untitledtrollmod.main;
 import de.budschie.untitledtrollmod.blocks.BlockRegistry;
 import de.budschie.untitledtrollmod.entities.EntityRegistry;
 import de.budschie.untitledtrollmod.items.ItemRegistry;
+import de.budschie.untitledtrollmod.networking.MainNetworkChannel;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus;
+import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 
 @Mod(value = UntitledMainClass.MODID)
@@ -19,5 +22,11 @@ public class UntitledMainClass
 		EntityRegistry.REGISTRY.register(FMLJavaModLoadingContext.get().getModEventBus());
 		ItemRegistry.REGISTRY.register(FMLJavaModLoadingContext.get().getModEventBus());
 		BlockRegistry.REGISTRY.register(FMLJavaModLoadingContext.get().getModEventBus());
+	}
+	
+	@SubscribeEvent
+	public static void onCommonSetup(FMLCommonSetupEvent event)
+	{
+		MainNetworkChannel.registerPackets();
 	}
 }
