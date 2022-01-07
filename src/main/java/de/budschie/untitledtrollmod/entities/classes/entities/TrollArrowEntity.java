@@ -1,4 +1,4 @@
-package de.budschie.untitledtrollmod.entities.classes;
+package de.budschie.untitledtrollmod.entities.classes.entities;
 
 import de.budschie.untitledtrollmod.entities.EntityRegistry;
 import de.budschie.untitledtrollmod.items.ItemRegistry;

@@ -1,6 +1,6 @@
 package de.budschie.untitledtrollmod.items.classes;
 
-import de.budschie.untitledtrollmod.entities.classes.TrollArrowEntity;
+import de.budschie.untitledtrollmod.entities.classes.entities.TrollArrowEntity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.item.ArrowItem;

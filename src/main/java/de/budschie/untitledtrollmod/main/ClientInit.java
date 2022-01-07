@@ -1,10 +1,13 @@
 package de.budschie.untitledtrollmod.main;
 
 import de.budschie.untitledtrollmod.entities.EntityRegistry;
-import de.budschie.untitledtrollmod.entities.classes.TrollArrowEntity;
+import de.budschie.untitledtrollmod.entities.classes.entities.TrollArrowEntity;
+import de.budschie.untitledtrollmod.entities.classes.rendering.TrollTNTModel;
+import de.budschie.untitledtrollmod.entities.classes.rendering.TrollTNTRenderer;
 import de.budschie.untitledtrollmod.items.ItemRegistry;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.renderer.entity.EntityRenderers;
+import net.minecraft.client.renderer.entity.SheepRenderer;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 import net.minecraft.client.renderer.item.ClampedItemPropertyFunction;
 import net.minecraft.client.renderer.item.ItemProperties;
@@ -12,6 +15,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus;
@@ -24,6 +28,8 @@ public class ClientInit
 	public static void onInitClient(FMLClientSetupEvent event)
 	{
 		EntityRenderers.register(EntityRegistry.TROLL_ARROW.get(), context -> new ThrownItemRenderer<TrollArrowEntity>(context));
+		EntityRenderers.register(EntityRegistry.TROLL_TNT.get(), context -> new TrollTNTRenderer(context));
+		EntityRenderers.register(EntityRegistry.SHEEP_HOPPER.get(), context -> new SheepRenderer(context));
 		
 		event.enqueueWork(() ->
 		{
@@ -55,4 +61,10 @@ public class ClientInit
 			});
 		});
 	}
+	
+    @SubscribeEvent
+    public static void registerLayer(EntityRenderersEvent.RegisterLayerDefinitions event)
+    {
+        event.registerLayerDefinition(TrollTNTRenderer.LAYER_LOCATION, TrollTNTModel::createBodyLayer);
+    }
 }
