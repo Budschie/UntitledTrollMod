@@ -25,17 +25,19 @@ import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.Explosion.BlockInteraction;
 
-public class TrollTNT extends PathfinderMob
+public class TrollTNTEntity extends PathfinderMob
 {
-	private static final EntityDataAccessor<Optional<UUID>> DATA_IGNITOR_UUID_ID = SynchedEntityData.defineId(TrollTNT.class, EntityDataSerializers.OPTIONAL_UUID);
-	private static final EntityDataAccessor<OptionalInt> DATA_TICKS_TO_EXPLODE_REMAINING = SynchedEntityData.defineId(TrollTNT.class, EntityDataSerializers.OPTIONAL_UNSIGNED_INT);
+	private static final EntityDataAccessor<Optional<UUID>> DATA_IGNITOR_UUID_ID = SynchedEntityData.defineId(TrollTNTEntity.class, EntityDataSerializers.OPTIONAL_UUID);
+	private static final EntityDataAccessor<OptionalInt> DATA_TICKS_TO_EXPLODE_REMAINING = SynchedEntityData.defineId(TrollTNTEntity.class, EntityDataSerializers.OPTIONAL_UNSIGNED_INT);
+//	private static final EntityDataAccessor<Integer> DATA_TICKS_TO_EXPLODE = SynchedEntityData.defineId(TrollTNTEntity.class, EntityDataSerializers.INT);
+	private static final EntityDataAccessor<Integer> DATA_STANDUP_TIME = SynchedEntityData.defineId(TrollTNTEntity.class, EntityDataSerializers.INT);
 	
-	protected TrollTNT(EntityType<? extends PathfinderMob> entityType, Level level)
+	protected TrollTNTEntity(EntityType<? extends PathfinderMob> entityType, Level level)
 	{
 		super(entityType, level);
 	}
 	
-	public TrollTNT(Level level)
+	public TrollTNTEntity(Level level)
 	{
 		super(EntityRegistry.TROLL_TNT.get(), level);
 	}
@@ -61,6 +63,8 @@ public class TrollTNT extends PathfinderMob
 		
 		this.entityData.define(DATA_TICKS_TO_EXPLODE_REMAINING, OptionalInt.empty());
 		this.entityData.define(DATA_IGNITOR_UUID_ID, Optional.empty());
+//		this.entityData.define(DATA_TICKS_TO_EXPLODE, 1);
+		this.entityData.define(DATA_STANDUP_TIME, 0);
 	}
 	
 	@Override
@@ -79,6 +83,10 @@ public class TrollTNT extends PathfinderMob
 		{
 			this.entityData.set(DATA_TICKS_TO_EXPLODE_REMAINING, OptionalInt.of(data.getAsInt() - 1));
 			
+			// Increment standup time for animation.
+			if(getStandupTime() < getMaxStandupTime())
+				setStandupTime(getStandupTime() + 1);
+			
 			if((data.getAsInt() - 1) <= 0)
 			{
 				explode();
@@ -88,15 +96,26 @@ public class TrollTNT extends PathfinderMob
 		}
 	}
 	
+	public int getStandupTime()
+	{
+		return this.entityData.get(DATA_STANDUP_TIME);
+	}
+	
+	public void setStandupTime(int time)
+	{
+		this.entityData.set(DATA_STANDUP_TIME, time);
+	}
+	
+	public int getMaxStandupTime()
+	{
+		return 10;
+	}
+	
 	public void explode()
 	{
 		this.discard();
 		
-		if(this.level.isClientSide())
-		{
-			
-		}
-		else
+		if(!level.isClientSide())
 		{
 			this.level.explode(this, getX(), getY(), getZ(), 3.0f, BlockInteraction.BREAK);
 		}
@@ -110,7 +129,18 @@ public class TrollTNT extends PathfinderMob
 	public void setIgnited(int ticksRemaining)
 	{
 		this.entityData.set(DATA_TICKS_TO_EXPLODE_REMAINING, OptionalInt.of(ticksRemaining));
+//		this.entityData.set(DATA_TICKS_TO_EXPLODE, ticksRemaining);
 	}
+	
+	public OptionalInt getIngitedTicksRemaining()
+	{
+		return this.entityData.get(DATA_TICKS_TO_EXPLODE_REMAINING);
+	}
+	
+//	public int getIgnitedTicksMax()
+//	{
+//		return this.entityData.get(DATA_TICKS_TO_EXPLODE);
+//	}
 	
 	public LivingEntity getIgnitor()
 	{

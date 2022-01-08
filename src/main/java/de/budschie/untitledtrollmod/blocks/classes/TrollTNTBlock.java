@@ -2,7 +2,7 @@ package de.budschie.untitledtrollmod.blocks.classes;
 
 import java.util.Optional;
 
-import de.budschie.untitledtrollmod.entities.classes.entities.TrollTNT;
+import de.budschie.untitledtrollmod.entities.classes.entities.TrollTNTEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.entity.LivingEntity;
@@ -33,7 +33,7 @@ public class TrollTNTBlock extends TntBlock
 		// Read ignitor from previous ignition
 		if(explosion.getDamageSource().getEntity() instanceof PrimedTnt pTnt)
 			igniter = pTnt.getOwner();
-		else if(explosion.getDamageSource().getEntity() instanceof TrollTNT trollTNT)
+		else if(explosion.getDamageSource().getEntity() instanceof TrollTNTEntity trollTNT)
 			igniter = trollTNT.getIgnitor();
 		
 		createEntity(p_57441_, p_57442_, Optional.ofNullable(igniter), 2 * 20);
@@ -43,7 +43,7 @@ public class TrollTNTBlock extends TntBlock
 	{
 		if(!world.isClientSide())
 		{
-			TrollTNT trollTnt = new TrollTNT(world);
+			TrollTNTEntity trollTnt = new TrollTNTEntity(world);
 			igniter.ifPresent(resolvedIgniter -> trollTnt.setIgnitor(resolvedIgniter));
 			trollTnt.setIgnited(time);
 			

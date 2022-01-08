@@ -3,7 +3,7 @@ package de.budschie.untitledtrollmod.entities.classes.rendering;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 
-import de.budschie.untitledtrollmod.entities.classes.entities.TrollTNT;
+import de.budschie.untitledtrollmod.entities.classes.entities.TrollTNTEntity;
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
@@ -12,12 +12,13 @@ import net.minecraft.client.model.geom.builders.CubeListBuilder;
 import net.minecraft.client.model.geom.builders.LayerDefinition;
 import net.minecraft.client.model.geom.builders.MeshDefinition;
 import net.minecraft.client.model.geom.builders.PartDefinition;
+import net.minecraft.util.Mth;
 
 // Made with Blockbench 4.1.1
 // Exported for Minecraft version 1.17 with Mojang mappings
 // Paste this class into your mod and generate all required imports
 
-public class TrollTNTModel<T extends TrollTNT> extends EntityModel<T>
+public class TrollTNTModel<T extends TrollTNTEntity> extends EntityModel<T>
 {
 	private final ModelPart root;
 
@@ -60,6 +61,10 @@ public class TrollTNTModel<T extends TrollTNT> extends EntityModel<T>
 		this.leftFoot.xRot = (float) (Math.sin(limbSwing - 90 * 2) * limbSwingAmount);
 		this.body.xRot = (float) Math.sin(limbSwing) * 0.2f * limbSwingAmount;
 		this.body.zRot = (float) Math.cos(limbSwing) * 0.2f * limbSwingAmount;
+		
+		float standupProgress = Math.min(entity.getStandupTime() + ageInTicks, entity.getMaxStandupTime());
+		
+		this.body.y = Mth.lerp(standupProgress, 0, -0.4f);
 	}
 
 	@Override

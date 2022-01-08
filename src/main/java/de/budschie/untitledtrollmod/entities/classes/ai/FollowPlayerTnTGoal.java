@@ -1,17 +1,17 @@
 package de.budschie.untitledtrollmod.entities.classes.ai;
 
-import de.budschie.untitledtrollmod.entities.classes.entities.TrollTNT;
+import de.budschie.untitledtrollmod.entities.classes.entities.TrollTNTEntity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.goal.Goal;
 
 public class FollowPlayerTnTGoal extends Goal
 {
-	private TrollTNT trollTnt;
+	private TrollTNTEntity trollTnt;
 	private LivingEntity playerToFollow;
 	private int timeToRecalcPath;
 	private double speed;
 	
-	public FollowPlayerTnTGoal(TrollTNT trollTnt, double speed)
+	public FollowPlayerTnTGoal(TrollTNTEntity trollTnt, double speed)
 	{
 		this.trollTnt = trollTnt;
 		this.speed = speed;
