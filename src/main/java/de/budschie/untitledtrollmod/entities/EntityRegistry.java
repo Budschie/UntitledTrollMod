@@ -2,7 +2,7 @@ package de.budschie.untitledtrollmod.entities;
 
 import de.budschie.untitledtrollmod.entities.classes.entities.SheepHopper;
 import de.budschie.untitledtrollmod.entities.classes.entities.TrollArrowEntity;
-import de.budschie.untitledtrollmod.entities.classes.entities.TrollTNT;
+import de.budschie.untitledtrollmod.entities.classes.entities.TrollTNTEntity;
 import de.budschie.untitledtrollmod.main.UntitledMainClass;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.EntityType.EntityFactory;
@@ -35,13 +35,13 @@ public class EntityRegistry
 	.setTrackingRange(40)
 	.build("troll_arrow"));
 	
-	public static final RegistryObject<EntityType<TrollTNT>> TROLL_TNT = REGISTRY.register("troll_tnt", () ->
-	EntityType.Builder.of(new EntityFactory<TrollTNT>()
+	public static final RegistryObject<EntityType<TrollTNTEntity>> TROLL_TNT = REGISTRY.register("troll_tnt", () ->
+	EntityType.Builder.of(new EntityFactory<TrollTNTEntity>()
 	{
 		@Override
-		public TrollTNT create(EntityType<TrollTNT> p_20722_, Level level)
+		public TrollTNTEntity create(EntityType<TrollTNTEntity> p_20722_, Level level)
 		{
-			return new TrollTNT(level);
+			return new TrollTNTEntity(level);
 		}	
 	}, MobCategory.CREATURE)
 	.sized(1, 1)
@@ -64,7 +64,7 @@ public class EntityRegistry
 	@SubscribeEvent
 	public static void onCreatingEntityAttributes(EntityAttributeCreationEvent event)
 	{
-		event.put(TROLL_TNT.get(), TrollTNT.setupAttributes());
+		event.put(TROLL_TNT.get(), TrollTNTEntity.setupAttributes());
 		event.put(SHEEP_HOPPER.get(), Sheep.createAttributes().build());
 	}
 }

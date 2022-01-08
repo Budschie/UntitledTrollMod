@@ -32,14 +32,41 @@ public class TrollTNTRenderer extends MobRenderer<TrollTNTEntity, TrollTNTModel<
 	}
 	
 	@Override
-	protected void scale(TrollTNTEntity trollEntity, PoseStack poseStack, float partialTicks)
+	protected void scale(TrollTNTEntity pLivingEntity, PoseStack pMatrixStack, float pPartialTickTime)
 	{
-		OptionalInt rem = trollEntity.getIngitedTicksRemaining();
+		super.scale(pLivingEntity, pMatrixStack, pPartialTickTime);
+		
+		OptionalInt rem = pLivingEntity.getIngitedTicksRemaining();
 		
 		if(rem.isPresent())
 		{
-			float scale = 1f + (1f - Math.min((Mth.lerp(partialTicks, rem.getAsInt(), rem.getAsInt())) / 20f, 1f)) * 0.5f;
-			poseStack.scale(scale, scale, scale);
+			float scale = 1f + getProgress(pLivingEntity, pPartialTickTime) * 0.5f;
+			pMatrixStack.scale(scale, scale, scale);
 		}
+	}
+	
+	@Override
+	protected float getWhiteOverlayProgress(TrollTNTEntity pLivingEntity, float pPartialTicks)
+	{
+		OptionalInt rem = pLivingEntity.getIngitedTicksRemaining();
+		
+		if(rem.isPresent())
+		{
+			return getProgress(pLivingEntity, pPartialTicks);
+		}
+		
+		return super.getWhiteOverlayProgress(pLivingEntity, pPartialTicks);
+	}
+	
+	private float getProgress(TrollTNTEntity tntEntity, float pTicks)
+	{
+		OptionalInt rem = tntEntity.getIngitedTicksRemaining();
+		
+		if(rem.isPresent())
+		{
+			return (1f - Math.min((rem.getAsInt() + pTicks) / 5f, 1f));
+		}
+		
+		return 0f;
 	}
 }

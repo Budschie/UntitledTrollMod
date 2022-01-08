@@ -14,6 +14,8 @@ import net.minecraft.world.MenuProvider;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EntitySelector;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.ai.goal.MeleeAttackGoal;
+import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.animal.Sheep;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.monster.piglin.PiglinAi;
@@ -58,6 +60,18 @@ public class SheepHopper extends Sheep implements Hopper, MenuProvider
 		sheep.addAdditionalSaveData(sheepData);
 		
 		this.readAdditionalSaveData(sheepData);
+		
+		this.copyPosition(sheep);
+		this.setXRot(sheep.getXRot());
+		this.setYRot(sheep.getYRot());
+		this.setYHeadRot(sheep.getYHeadRot());
+		this.setYBodyRot(sheep.yBodyRot);
+	}
+	
+	@Override
+	protected void registerGoals()
+	{
+		super.registerGoals();
 	}
 	
 	@Override
@@ -65,7 +79,7 @@ public class SheepHopper extends Sheep implements Hopper, MenuProvider
 	{
 		super.tick();
 		
-		if(--cooldown <= 0)
+		if(isAlive() && --cooldown <= 0)
 		{
 			suckInItems(4);
 		}

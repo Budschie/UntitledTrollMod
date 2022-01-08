@@ -1,9 +1,15 @@
 package de.budschie.untitledtrollmod.main;
 
 import de.budschie.untitledtrollmod.blocks.BlockRegistry;
+import de.budschie.untitledtrollmod.caps.aggressive_animal.IAggressiveAnimal;
 import de.budschie.untitledtrollmod.entities.EntityRegistry;
 import de.budschie.untitledtrollmod.items.ItemRegistry;
 import de.budschie.untitledtrollmod.networking.MainNetworkChannel;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraftforge.common.capabilities.RegisterCapabilitiesEvent;
+import net.minecraftforge.event.entity.EntityAttributeModificationEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
@@ -28,5 +34,20 @@ public class UntitledMainClass
 	public static void onCommonSetup(FMLCommonSetupEvent event)
 	{
 		MainNetworkChannel.registerPackets();
+	}
+	
+	@SubscribeEvent
+	public static void onModifyingAttributes(EntityAttributeModificationEvent event)
+	{
+		for(EntityType<? extends Mob> entityType : Events.WHITELIST_TROLL_ATTACK.resolve().get())
+		{
+			event.add(entityType, Attributes.ATTACK_DAMAGE, 5.0d);
+		}
+	}
+	
+	@SubscribeEvent
+	public static void onRegisteringCaps(RegisterCapabilitiesEvent event)
+	{
+		event.register(IAggressiveAnimal.class);
 	}
 }
