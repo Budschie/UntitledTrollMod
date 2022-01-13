@@ -2,6 +2,8 @@ package de.budschie.untitledtrollmod.main;
 
 import de.budschie.untitledtrollmod.blocks.BlockRegistry;
 import de.budschie.untitledtrollmod.caps.aggressive_animal.IAggressiveAnimal;
+import de.budschie.untitledtrollmod.caps.crouch_lock.ICrouchLock;
+import de.budschie.untitledtrollmod.caps.fake_xray.IFakeXray;
 import de.budschie.untitledtrollmod.entities.EntityRegistry;
 import de.budschie.untitledtrollmod.items.ItemRegistry;
 import de.budschie.untitledtrollmod.networking.MainNetworkChannel;
@@ -49,5 +51,7 @@ public class UntitledMainClass
 	public static void onRegisteringCaps(RegisterCapabilitiesEvent event)
 	{
 		event.register(IAggressiveAnimal.class);
+		event.register(IFakeXray.class);
+		event.register(ICrouchLock.class);
 	}
 }
