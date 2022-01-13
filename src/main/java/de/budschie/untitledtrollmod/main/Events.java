@@ -13,7 +13,6 @@ import de.budschie.untitledtrollmod.entities.classes.entities.SheepHopper;
 import de.budschie.untitledtrollmod.networking.MainNetworkChannel;
 import de.budschie.untitledtrollmod.networking.packets.CrouchLockSync;
 import de.budschie.untitledtrollmod.utils.Accessors;
-import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.TextComponent;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.server.level.ServerPlayer;
@@ -44,6 +43,7 @@ public class Events
 	public static final LazyOptional<HashSet<EntityType<? extends PathfinderMob>>> WHITELIST_TROLL_ATTACK = LazyOptional.of(() -> new HashSet<>(
 			Arrays.asList(EntityType.SHEEP, EntityType.CHICKEN, EntityType.HORSE, EntityType.PIG, EntityType.COW, EntityRegistry.SHEEP_HOPPER.get(), EntityType.MULE, EntityType.DONKEY)));
 	
+	@SubscribeEvent
 	public static void onPlayerTick(PlayerTickEvent event)
 	{
 		// The code is a bit ugly but who cares lulw
@@ -63,7 +63,7 @@ public class Events
 			// Set cap to enabled and lock
 			if(event.player.getRandom().nextInt(100) == 0)
 			{
-				int ticksToCrouchLock = event.player.getRandom().nextInt(30) + 10;
+				int ticksToCrouchLock = event.player.getRandom().nextInt(30) + 100;
 				
 				cap.setCrouchLockedTicks(ticksToCrouchLock);
 				

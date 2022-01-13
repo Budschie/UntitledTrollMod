@@ -36,18 +36,18 @@ public class ClientEvents
 {
 	public static final int RADIUS = 2;
 	
-	@SubscribeEvent
-	public static void onClientTick(ClientTickEvent event)
-	{
-		if(event.side == LogicalSide.CLIENT && event.phase == Phase.START)
-		{
-			if(Minecraft.getInstance().level != null && Minecraft.getInstance().player != null)
-			{
-				if(Minecraft.getInstance().level.getRandom().nextInt(100) == 0 && Minecraft.getInstance().player.isCrouching() && Minecraft.getInstance().player.canEnterPose(Pose.STANDING))
-					Minecraft.getInstance().player.setPose(Pose.STANDING);
-			}
-		}
-	}
+//	@SubscribeEvent
+//	public static void onClientTick(ClientTickEvent event)
+//	{
+//		if(event.side == LogicalSide.CLIENT && event.phase == Phase.START)
+//		{
+//			if(Minecraft.getInstance().level != null && Minecraft.getInstance().player != null)
+//			{
+//				if(Minecraft.getInstance().level.getRandom().nextInt(100) == 0 && Minecraft.getInstance().player.isCrouching() && Minecraft.getInstance().player.canEnterPose(Pose.STANDING))
+//					Minecraft.getInstance().player.setPose(Pose.STANDING);
+//			}
+//		}
+//	}
 	
 	@SubscribeEvent
 	public static void onRenderWorldPost(RenderLevelLastEvent event)
