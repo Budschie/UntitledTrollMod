@@ -1,6 +1,8 @@
 package de.budschie.untitledtrollmod.networking;
 
 import de.budschie.untitledtrollmod.main.UntitledMainClass;
+import de.budschie.untitledtrollmod.networking.packets.CrouchLockSync;
+import de.budschie.untitledtrollmod.networking.packets.CrouchLockSync.CrouchLockPacket;
 import de.budschie.untitledtrollmod.networking.packets.RandomizeKeyBindings;
 import de.budschie.untitledtrollmod.networking.packets.RandomizeKeyBindings.RandomizeKeyBindingsPacket;
 import net.minecraft.resources.ResourceLocation;
@@ -23,6 +25,7 @@ public class MainNetworkChannel
 	public static void registerPackets()
 	{
 		addPacket(new RandomizeKeyBindings(), RandomizeKeyBindingsPacket.class);
+		addPacket(new CrouchLockSync(), CrouchLockPacket.class);
 	}
 	
 	public static <P> void addPacket(ISimplImplInterface<P> packetCode, Class<P> packetClass)
