@@ -1,5 +1,6 @@
 package de.budschie.untitledtrollmod.items;
 
+import de.budschie.untitledtrollmod.main.UntitledMainClass;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -28,7 +29,7 @@ public enum UntitledArmorMaterials implements ArmorMaterial
 		this.enchantmentValue = enchantmentValue;
 		this.equipSound = equipSound;
 		this.repairIngredient = repairIngredient;
-		this.name = name;
+		this.name = UntitledMainClass.MODID + ":" + name;
 		this.toughness = toughness;
 		this.knockbackResistance = knockbackResistance;
 	}
