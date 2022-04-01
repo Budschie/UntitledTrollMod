@@ -4,6 +4,8 @@ import de.budschie.untitledtrollmod.blocks.BlockRegistry;
 import de.budschie.untitledtrollmod.items.classes.TrollArrowItem;
 import de.budschie.untitledtrollmod.items.classes.TrollBowItem;
 import de.budschie.untitledtrollmod.main.UntitledMainClass;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.registries.DeferredRegister;
@@ -19,4 +21,6 @@ public class ItemRegistry
 	public static final RegistryObject<Item> FAIL_CROUCH_ITEM = REGISTRY.register("fail_crouch_item", () -> new TrollArrowItem(new Item.Properties().tab(ModCreativeModeTabs.TROLL_TAB)));
 	
 	public static final RegistryObject<Item> TROLL_TNT = REGISTRY.register("troll_tnt", () -> new BlockItem(BlockRegistry.TROLL_TNT.get(), new Item.Properties().tab(ModCreativeModeTabs.TROLL_TAB)));
+	
+	public static final RegistryObject<ArmorItem> XRAY_HEADSET = REGISTRY.register("xray_headset", () -> new ArmorItem(UntitledArmorMaterials.HEADSET, EquipmentSlot.HEAD, new Item.Properties().tab(ModCreativeModeTabs.TROLL_TAB)));
 }
