@@ -5,6 +5,8 @@ import java.util.Optional;
 import de.budschie.untitledtrollmod.entities.classes.entities.TrollTNTEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.item.PrimedTnt;
 import net.minecraft.world.level.Explosion;
@@ -48,6 +50,8 @@ public class TrollTNTBlock extends TntBlock
 			trollTnt.setIgnited(time);
 			
 			trollTnt.setPos(pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5);
+			
+			world.playSound(null, pos, SoundEvents.TNT_PRIMED, SoundSource.BLOCKS, 1, .5f);
 			
 			world.addFreshEntity(trollTnt);
 		}

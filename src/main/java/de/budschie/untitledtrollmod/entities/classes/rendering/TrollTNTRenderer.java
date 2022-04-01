@@ -64,7 +64,7 @@ public class TrollTNTRenderer extends MobRenderer<TrollTNTEntity, TrollTNTModel<
 		
 		if(rem.isPresent())
 		{
-			return (1f - Math.min((rem.getAsInt() + pTicks) / 5f, 1f));
+			return (1f - Math.min((rem.getAsInt() + pTicks) / 10f, 1f));
 		}
 		
 		return 0f;

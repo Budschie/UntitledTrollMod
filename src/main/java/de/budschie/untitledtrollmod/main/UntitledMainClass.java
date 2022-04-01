@@ -4,6 +4,7 @@ import de.budschie.untitledtrollmod.blocks.BlockRegistry;
 import de.budschie.untitledtrollmod.caps.aggressive_animal.IAggressiveAnimal;
 import de.budschie.untitledtrollmod.caps.crouch_lock.ICrouchLock;
 import de.budschie.untitledtrollmod.caps.fake_xray.IFakeXray;
+import de.budschie.untitledtrollmod.effects.MobEffectRegistry;
 import de.budschie.untitledtrollmod.entities.EntityRegistry;
 import de.budschie.untitledtrollmod.items.ItemRegistry;
 import de.budschie.untitledtrollmod.networking.MainNetworkChannel;
@@ -30,6 +31,7 @@ public class UntitledMainClass
 		EntityRegistry.REGISTRY.register(FMLJavaModLoadingContext.get().getModEventBus());
 		ItemRegistry.REGISTRY.register(FMLJavaModLoadingContext.get().getModEventBus());
 		BlockRegistry.REGISTRY.register(FMLJavaModLoadingContext.get().getModEventBus());
+		MobEffectRegistry.REGISTRY.register(FMLJavaModLoadingContext.get().getModEventBus());
 	}
 	
 	@SubscribeEvent

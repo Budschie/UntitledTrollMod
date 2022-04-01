@@ -12,6 +12,7 @@ import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.damagesource.DamageSource;
@@ -94,6 +95,24 @@ public class TrollTNTEntity extends PathfinderMob
 			
             this.level.addParticle(ParticleTypes.SMOKE, this.getX(), this.getY() + 1.1D, this.getZ(), 0.0D, 0.0D, 0.0D);
 		}
+	}
+	
+	@Override
+	protected SoundEvent getDeathSound()
+	{
+		return SoundEvents.TNT_PRIMED;
+	}
+	
+	@Override
+	public float getVoicePitch()
+	{
+		return 1.5f;
+	}
+	
+	@Override
+	protected SoundEvent getHurtSound(DamageSource pDamageSource)
+	{
+		return SoundEvents.TNT_PRIMED;
 	}
 	
 	public int getStandupTime()

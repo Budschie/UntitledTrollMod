@@ -4,20 +4,20 @@ import java.util.Arrays;
 import java.util.HashSet;
 
 import de.budschie.untitledtrollmod.caps.aggressive_animal.AggressiveAnimalProvider;
-import de.budschie.untitledtrollmod.caps.aggressive_animal.IAggressiveAnimal;
 import de.budschie.untitledtrollmod.caps.crouch_lock.CrouchLockProvider;
 import de.budschie.untitledtrollmod.caps.crouch_lock.ICrouchLock;
 import de.budschie.untitledtrollmod.caps.fake_xray.FakeXrayProvider;
+import de.budschie.untitledtrollmod.effects.MobEffectRegistry;
 import de.budschie.untitledtrollmod.entities.EntityRegistry;
 import de.budschie.untitledtrollmod.entities.classes.entities.SheepHopper;
 import de.budschie.untitledtrollmod.networking.MainNetworkChannel;
 import de.budschie.untitledtrollmod.networking.packets.CrouchLockSync;
-import de.budschie.untitledtrollmod.utils.Accessors;
-import net.minecraft.network.chat.TextComponent;
-import net.minecraft.network.chat.TranslatableComponent;
+import de.budschie.untitledtrollmod.utils.EntityUtil;
+import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.tags.FluidTags;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
@@ -27,13 +27,16 @@ import net.minecraft.world.entity.animal.Sheep;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.chunk.LevelChunk;
+import net.minecraft.world.level.material.FluidState;
+import net.minecraft.world.level.material.Fluids;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
-import net.minecraftforge.event.TickEvent.Phase;
 import net.minecraftforge.event.TickEvent.PlayerTickEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
+import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.LogicalSide;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.network.PacketDistributor;
 
@@ -41,15 +44,23 @@ import net.minecraftforge.network.PacketDistributor;
 public class Events
 {
 	public static final LazyOptional<HashSet<EntityType<? extends PathfinderMob>>> WHITELIST_TROLL_ATTACK = LazyOptional.of(() -> new HashSet<>(
-			Arrays.asList(EntityType.SHEEP, EntityType.CHICKEN, EntityType.HORSE, EntityType.PIG, EntityType.COW, EntityRegistry.SHEEP_HOPPER.get(), EntityType.MULE, EntityType.DONKEY)));
+			Arrays.asList(EntityType.SHEEP, EntityType.CHICKEN, EntityType.HORSE, EntityType.PIG, EntityType.COW, EntityRegistry.SHEEP_HOPPER.get(), EntityType.MULE, EntityType.DONKEY, EntityType.FOX, EntityType.GOAT)));
 	
 	@SubscribeEvent
 	public static void onPlayerTick(PlayerTickEvent event)
 	{
-		// The code is a bit ugly but who cares lulw
-		if(event.phase == Phase.START)
-			return;
+		// Jesus may not swim. Make him float up the water
+		if (event.player.hasEffect(MobEffectRegistry.JESUS_JUICE_EFFECT.get()))
+		{			
+			FluidState state = event.player.level.getFluidState(new BlockPos(event.player.position().add(0, 0.5, 0)));
+			
+			if(event.player.isAffectedByFluids() && state.getType() == Fluids.WATER)
+			{
+				event.player.setDeltaMovement(event.player.getDeltaMovement().scale(1).add(0.0D, 0.05D, 0.0D));
+			}
+		}
 		
+		// The code is a bit ugly but who cares lulw
 		LazyOptional<ICrouchLock> capOpt = event.player.getCapability(CrouchLockProvider.CAP);
 		
 		if(!capOpt.isPresent())
@@ -57,28 +68,43 @@ public class Events
 		
 		ICrouchLock cap = capOpt.resolve().get();
 		
-		// Check if we are server
-		if(!event.player.level.isClientSide())
+		// Set cap to enabled and lock
+		if (cap.getCrouchLockedTicks() == -1 && event.player.getRandom().nextInt(500) == 0 && event.side == LogicalSide.SERVER)
 		{
-			// Set cap to enabled and lock
-			if(event.player.getRandom().nextInt(100) == 0)
-			{
-				int ticksToCrouchLock = event.player.getRandom().nextInt(30) + 100;
-				
-				cap.setCrouchLockedTicks(ticksToCrouchLock);
-				
-				MainNetworkChannel.INSTANCE.send(PacketDistributor.PLAYER.with(() -> (ServerPlayer)event.player), new CrouchLockSync.CrouchLockPacket(ticksToCrouchLock));
-			}
+			int ticksToCrouchLock = event.player.getRandom().nextInt(30) + 100;
+
+			cap.setCrouchLockedTicks(ticksToCrouchLock);
+
+			MainNetworkChannel.INSTANCE.send(PacketDistributor.PLAYER.with(() -> (ServerPlayer) event.player), new CrouchLockSync.CrouchLockPacket(ticksToCrouchLock));
 		}
+		
+		updateCrouchCap(cap, event.player);
+	}
 	
-		if(cap.getCrouchLockedTicks() > 0 && event.player.isCrouching() && event.player.canEnterPose(Pose.STANDING))
+	public static void updateCrouchCap(ICrouchLock cap, Player player)
+	{
+		// Check if our sneaking is stunned
+		if(cap.getCrouchLockedTicks() > -1)
 		{
-			event.player.setPose(Pose.STANDING);
-			event.player.setForcedPose(Pose.STANDING);
+			if(cap.getCrouchLockedTicks() > 0)
+			{
+				if((player.isDiscrete()) && player.getForcedPose() == null)
+				{
+					player.setForcedPose(Pose.STANDING);
+				}
+				else if(!player.isDiscrete() && player.getForcedPose() != null)
+				{
+					player.setForcedPose(null);
+				}
+			}
+			
 			
 			// Decrement crouch lock
-			cap.setCrouchLockedTicks(cap.getCrouchLockedTicks() - 1);
+			cap.setCrouchLockedTicks(cap.getCrouchLockedTicks() - 1);			
 		}
+		
+		if(cap.getCrouchLockedTicks() == 0 && player.getForcedPose() == Pose.STANDING)
+			player.setForcedPose(null);
 	}
 	
 	@SubscribeEvent
@@ -114,20 +140,22 @@ public class Events
 		if(!event.getEntityLiving().level.isClientSide() && WHITELIST_TROLL_ATTACK.resolve().get().contains(event.getEntity().getType()) && event.getEntity().level.getRandom().nextInt(5) < 5)
 		{
 			PathfinderMob mob = (PathfinderMob) event.getEntity();
-			
-			// We give the animal double the speed and let it see through walls muhahahahahaaaaa
-			
-			LazyOptional<IAggressiveAnimal> aggressiveAnimal = mob.getCapability(AggressiveAnimalProvider.CAP);
-			
-			if(aggressiveAnimal.isPresent() && !aggressiveAnimal.resolve().get().isAggressive())
-			{				
-				mob.setCustomName(new TextComponent("Violent ").append(new TranslatableComponent(mob.getType().getDescriptionId())));
-				mob.setCustomNameVisible(true);
-				
-				event.getEntity().level.playSound(null, event.getEntity().getX(), event.getEntity().getY(), event.getEntity().getZ(), Accessors.getAmbientSound(mob), SoundSource.HOSTILE, 2, 0);
-				
-				aggressiveAnimal.resolve().get().setAggressive(true);
-			}
+			EntityUtil.makeEntityViolent(mob);
+		}
+	}
+	
+	@SubscribeEvent
+	public static void onJoinedGame(PlayerEvent.PlayerLoggedInEvent event)
+	{
+		if(event.getPlayer() != null)
+		{
+			event.getPlayer().getCapability(CrouchLockProvider.CAP).ifPresent(cap ->
+			{
+				if(cap.getCrouchLockedTicks() > -1)
+				{
+					MainNetworkChannel.INSTANCE.send(PacketDistributor.PLAYER.with(() -> (ServerPlayer) event.getPlayer()), new CrouchLockSync.CrouchLockPacket(cap.getCrouchLockedTicks()));
+				}
+			});
 		}
 	}
 	

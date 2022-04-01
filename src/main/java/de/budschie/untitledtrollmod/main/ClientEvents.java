@@ -6,6 +6,8 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Vector4f;
 
+import de.budschie.untitledtrollmod.caps.crouch_lock.CrouchLockProvider;
+import de.budschie.untitledtrollmod.caps.crouch_lock.ICrouchLock;
 import de.budschie.untitledtrollmod.caps.fake_xray.FakeXrayProvider;
 import de.budschie.untitledtrollmod.caps.fake_xray.IFakeXray;
 import de.budschie.untitledtrollmod.caps.fake_xray.IFakeXray.FakeOre;
@@ -35,19 +37,6 @@ import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 public class ClientEvents
 {
 	public static final int RADIUS = 2;
-	
-//	@SubscribeEvent
-//	public static void onClientTick(ClientTickEvent event)
-//	{
-//		if(event.side == LogicalSide.CLIENT && event.phase == Phase.START)
-//		{
-//			if(Minecraft.getInstance().level != null && Minecraft.getInstance().player != null)
-//			{
-//				if(Minecraft.getInstance().level.getRandom().nextInt(100) == 0 && Minecraft.getInstance().player.isCrouching() && Minecraft.getInstance().player.canEnterPose(Pose.STANDING))
-//					Minecraft.getInstance().player.setPose(Pose.STANDING);
-//			}
-//		}
-//	}
 	
 	@SubscribeEvent
 	public static void onRenderWorldPost(RenderLevelLastEvent event)
