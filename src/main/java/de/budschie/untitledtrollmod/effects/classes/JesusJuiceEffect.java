@@ -12,7 +12,5 @@ public class JesusJuiceEffect extends MobEffect
 	public JesusJuiceEffect()
 	{
 		super(MobEffectCategory.BENEFICIAL, 16777215);
-		
-		this.addAttributeModifier(ForgeMod.SWIM_SPEED.get(), "b2b44cc8-d86c-4d1d-989d-a785a385778b", 1, Operation.ADDITION);
 	}
 }
