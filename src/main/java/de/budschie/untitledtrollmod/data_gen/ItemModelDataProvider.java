@@ -8,7 +8,7 @@ import net.minecraftforge.common.data.ExistingFileHelper;
 
 public class ItemModelDataProvider extends ItemModelProvider
 {
-	private static final ResourceLocation GENERATED = new ResourceLocation(UntitledMainClass.MODID, "item/generated");
+	private static final ResourceLocation GENERATED = new ResourceLocation("item/generated");
 	
 	public ItemModelDataProvider(DataGenerator generator, String modid, ExistingFileHelper existingFileHelper)
 	{
@@ -18,6 +18,6 @@ public class ItemModelDataProvider extends ItemModelProvider
 	@Override
 	protected void registerModels()
 	{
-		singleTexture("xray_headset", GENERATED, new ResourceLocation(UntitledMainClass.MODID, "item/xray_headset"));
+		singleTexture("xray_headset", GENERATED, "layer0", new ResourceLocation(UntitledMainClass.MODID, "item/xray_headset"));
 	}
 }

@@ -3,9 +3,10 @@ package de.budschie.untitledtrollmod.data_gen;
 import de.budschie.untitledtrollmod.main.UntitledMainClass;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
+import net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus;
 import net.minecraftforge.forge.event.lifecycle.GatherDataEvent;
 
-@EventBusSubscriber()
+@EventBusSubscriber(bus = Bus.MOD)
 public class DataGathering
 {
 	@SubscribeEvent
