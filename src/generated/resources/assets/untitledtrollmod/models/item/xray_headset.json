@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "untitledtrollmod:item/xray_headset"
+  }
+}
