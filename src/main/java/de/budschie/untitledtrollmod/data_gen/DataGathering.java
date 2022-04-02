@@ -14,5 +14,7 @@ public class DataGathering
 	{
 		event.getGenerator().addProvider(new ItemModelDataProvider(event.getGenerator(), UntitledMainClass.MODID, event.getExistingFileHelper()));
 		event.getGenerator().addProvider(new LanguageDataProvider(event.getGenerator(), UntitledMainClass.MODID, "en_us"));
+		event.getGenerator().addProvider(new ModBlockStateProvider(event.getGenerator(), UntitledMainClass.MODID, event.getExistingFileHelper()));
+
 	}
 }
