@@ -110,34 +110,45 @@ public class Events
 	@SubscribeEvent
 	public static void onPlayerInteractWithEntity(PlayerInteractEvent.EntityInteract event)
 	{
-		if(!event.getPlayer().level.isClientSide() && event.getItemStack().getItem() == Items.HOPPER && event.getTarget().getClass() == Sheep.class)
+		if(!event.getPlayer().level.isClientSide())
 		{
-			Sheep sheep = (Sheep) event.getTarget();
-			
-			SheepHopper sheepHopper = new SheepHopper(sheep);
-			sheepHopper.copyPosition(sheep);
-			
-			event.getWorld().addFreshEntity(sheepHopper);
-			sheep.discard();
-			event.getPlayer().level.addFreshEntity(sheepHopper);
-			
-			event.getWorld().playSound(null, sheep.getX(), sheep.getY(), sheep.getZ(), SoundEvents.SHEEP_SHEAR, SoundSource.NEUTRAL, 1, 0);
-			event.getWorld().playSound(null, sheep.getX(), sheep.getY(), sheep.getZ(), SoundEvents.SHEEP_AMBIENT, SoundSource.NEUTRAL, 1, 0);
-			event.getWorld().playSound(null, sheep.getX(), sheep.getY(), sheep.getZ(), SoundEvents.ANVIL_PLACE, SoundSource.NEUTRAL, 1, 2);
-			
-			if(!event.getPlayer().getAbilities().instabuild)
-				event.getItemStack().setCount(event.getItemStack().getCount() - 1);
-			
-			event.setCancellationResult(InteractionResult.SUCCESS);
-			
-			EntityType.SHEEP.hashCode();
+			if(event.getItemStack().getItem() == Items.HOPPER && event.getTarget().getClass() == Sheep.class)
+			{
+				Sheep sheep = (Sheep) event.getTarget();
+				
+				SheepHopper sheepHopper = new SheepHopper(sheep);
+				sheepHopper.copyPosition(sheep);
+				
+				event.getWorld().addFreshEntity(sheepHopper);
+				sheep.discard();
+				event.getPlayer().level.addFreshEntity(sheepHopper);
+				
+				event.getWorld().playSound(null, sheep.getX(), sheep.getY(), sheep.getZ(), SoundEvents.SHEEP_SHEAR, SoundSource.NEUTRAL, 1, 0);
+				event.getWorld().playSound(null, sheep.getX(), sheep.getY(), sheep.getZ(), SoundEvents.SHEEP_AMBIENT, SoundSource.NEUTRAL, 1, 0);
+				event.getWorld().playSound(null, sheep.getX(), sheep.getY(), sheep.getZ(), SoundEvents.ANVIL_PLACE, SoundSource.NEUTRAL, 1, 2);
+				
+				if(!event.getPlayer().getAbilities().instabuild)
+					event.getItemStack().setCount(event.getItemStack().getCount() - 1);
+				
+				event.setCancellationResult(InteractionResult.SUCCESS);
+			}
+			else if(event.getItemStack().getItem() == Items.STICK && WHITELIST_TROLL_ATTACK.resolve().get().contains(event.getTarget().getType()))
+			{
+				if(!event.getPlayer().getAbilities().instabuild)
+					event.getItemStack().setCount(event.getItemStack().getCount() - 1);
+				
+				PathfinderMob mob = (PathfinderMob) event.getTarget();
+				EntityUtil.makeEntityViolent(mob);
+				
+				event.setCancellationResult(InteractionResult.SUCCESS);
+			}
 		}
 	}
 	
 	@SubscribeEvent
 	public static void onEntityHurt(LivingHurtEvent event)
 	{
-		if(!event.getEntityLiving().level.isClientSide() && WHITELIST_TROLL_ATTACK.resolve().get().contains(event.getEntity().getType()) && event.getEntity().level.getRandom().nextInt(5) < 5)
+		if(!event.getEntityLiving().level.isClientSide() && WHITELIST_TROLL_ATTACK.resolve().get().contains(event.getEntity().getType()) && event.getEntity().level.getRandom().nextInt(100) < 5)
 		{
 			PathfinderMob mob = (PathfinderMob) event.getEntity();
 			EntityUtil.makeEntityViolent(mob);
