@@ -16,7 +16,7 @@ public class TrollTNTRenderer extends MobRenderer<TrollTNTEntity, TrollTNTModel<
 {
 	// This layer location should be baked with EntityRendererProvider.Context in
 	// the entity renderer and passed into this model's constructor
-	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new ResourceLocation("bmorph", "troll_tnt"), "main");
+	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new ResourceLocation(UntitledMainClass.MODID, "troll_tnt"), "main");
 	
 	public static final ResourceLocation TEXTURE = new ResourceLocation(UntitledMainClass.MODID, "textures/entity/troll_tnt.png");
 
