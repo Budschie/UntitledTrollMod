@@ -2,6 +2,7 @@ package de.budschie.untitledtrollmod.main;
 
 import de.budschie.untitledtrollmod.entities.EntityRegistry;
 import de.budschie.untitledtrollmod.entities.classes.entities.TrollArrowEntity;
+import de.budschie.untitledtrollmod.entities.classes.rendering.RocketCreeperRenderer;
 import de.budschie.untitledtrollmod.entities.classes.rendering.TrollTNTModel;
 import de.budschie.untitledtrollmod.entities.classes.rendering.TrollTNTRenderer;
 import de.budschie.untitledtrollmod.items.ItemRegistry;
@@ -30,6 +31,7 @@ public class ClientInit
 		EntityRenderers.register(EntityRegistry.TROLL_ARROW.get(), context -> new ThrownItemRenderer<TrollArrowEntity>(context));
 		EntityRenderers.register(EntityRegistry.TROLL_TNT.get(), context -> new TrollTNTRenderer(context));
 		EntityRenderers.register(EntityRegistry.SHEEP_HOPPER.get(), context -> new SheepRenderer(context));
+		EntityRenderers.register(EntityRegistry.ROCKET_CREEPER.get(), RocketCreeperRenderer::new);
 		
 		event.enqueueWork(() ->
 		{

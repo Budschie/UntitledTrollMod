@@ -1,13 +1,15 @@
 package de.budschie.untitledtrollmod.entities;
 
+import de.budschie.untitledtrollmod.entities.classes.entities.RocketCreeper;
 import de.budschie.untitledtrollmod.entities.classes.entities.SheepHopper;
 import de.budschie.untitledtrollmod.entities.classes.entities.TrollArrowEntity;
 import de.budschie.untitledtrollmod.entities.classes.entities.TrollTNTEntity;
 import de.budschie.untitledtrollmod.main.UntitledMainClass;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.EntityType.EntityFactory;
-import net.minecraft.world.entity.animal.Sheep;
 import net.minecraft.world.entity.MobCategory;
+import net.minecraft.world.entity.animal.Sheep;
+import net.minecraft.world.entity.monster.Creeper;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -61,10 +63,25 @@ public class EntityRegistry
 	.setTrackingRange(40)
 	.build("troll_tnt"));
 	
+	public static final RegistryObject<EntityType<RocketCreeper>> ROCKET_CREEPER = REGISTRY.register("rocket_creeper", () ->
+	EntityType.Builder.of(new EntityFactory<RocketCreeper>()
+	{
+		@Override
+		public RocketCreeper create(EntityType<RocketCreeper> type, Level level)
+		{
+			return new RocketCreeper(type, level);
+		}	
+	}, MobCategory.MONSTER)
+	.sized(0.6f, 1.7f)
+	.setTrackingRange(8)
+	.build("troll_tnt"));
+
+	
 	@SubscribeEvent
 	public static void onCreatingEntityAttributes(EntityAttributeCreationEvent event)
 	{
 		event.put(TROLL_TNT.get(), TrollTNTEntity.setupAttributes());
 		event.put(SHEEP_HOPPER.get(), Sheep.createAttributes().build());
+		event.put(ROCKET_CREEPER.get(), Creeper.createAttributes().build());
 	}
 }
