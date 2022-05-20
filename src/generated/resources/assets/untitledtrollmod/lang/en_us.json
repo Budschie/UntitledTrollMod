@@ -1,4 +1,8 @@
 {
   "block.untitledtrollmod.blocking_air": "Blocking Air",
+  "entity.untitledtrollmod.rocket_creeper": "Rocket Creeper",
+  "entity.untitledtrollmod.sheep_hopper": "Sheep Hopper",
+  "entity.untitledtrollmod.troll_tnt": "Troll TNT",
+  "item.untitledtrollmod.universal_air_remover": "Universal Air Remover",
   "item.untitledtrollmod.xray_headset": "X-Ray Headset"
 }
