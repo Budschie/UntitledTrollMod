@@ -33,7 +33,7 @@ public class BlockingAir extends Block
 	@Override
 	public VoxelShape getVisualShape(BlockState pState, BlockGetter pLevel, BlockPos pPos, CollisionContext pContext)
 	{
-		return Shapes.empty();
+		return Shapes.block();
 	}
 	
 	@Override
@@ -45,12 +45,12 @@ public class BlockingAir extends Block
 	@Override
 	public boolean canBeReplaced(BlockState pState, Fluid pFluid)
 	{
-		return true;
+		return false;
 	}
 	
 	@Override
 	public boolean canBeReplaced(BlockState pState, BlockPlaceContext pUseContext)
 	{
-		return true;
+		return false;
 	}
 }
