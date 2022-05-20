@@ -42,16 +42,4 @@ public class UniversalAirRemover extends Item
 		
 		return super.onItemUseFirst(stack, context);
 	}
-	
-	@Override
-	public boolean isDamageable(ItemStack stack)
-	{
-		return true;
-	}
-	
-	@Override
-	public int getMaxDamage(ItemStack stack)
-	{
-		return 100;
-	}
 }
