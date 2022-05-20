@@ -44,7 +44,7 @@ import net.minecraftforge.network.PacketDistributor;
 public class Events
 {
 	public static final LazyOptional<HashSet<EntityType<? extends PathfinderMob>>> WHITELIST_TROLL_ATTACK = LazyOptional.of(() -> new HashSet<>(
-			Arrays.asList(EntityType.SHEEP, EntityType.CHICKEN, EntityType.HORSE, EntityType.PIG, EntityType.COW, EntityRegistry.SHEEP_HOPPER.get(), EntityType.MULE, EntityType.DONKEY, EntityType.FOX, EntityType.GOAT)));
+			Arrays.asList(EntityType.SHEEP, EntityType.CHICKEN, EntityType.HORSE, EntityType.PIG, EntityType.COW, EntityRegistry.SHEEP_HOPPER.get(), EntityType.MULE, EntityType.DONKEY, EntityType.FOX, EntityType.GOAT, EntityType.PILLAGER)));
 	
 	@SubscribeEvent
 	public static void onPlayerTick(PlayerTickEvent event)
@@ -132,13 +132,14 @@ public class Events
 				
 				event.setCancellationResult(InteractionResult.SUCCESS);
 			}
-			else if(event.getItemStack().getItem() == Items.STICK && WHITELIST_TROLL_ATTACK.resolve().get().contains(event.getTarget().getType()))
+			else if(event.getItemStack().getItem() == Items.STICK && WHITELIST_TROLL_ATTACK.resolve().get().contains(event.getTarget().getType()) && !EntityUtil.isViolent(event.getTarget()))
 			{
 				if(!event.getPlayer().getAbilities().instabuild)
 					event.getItemStack().setCount(event.getItemStack().getCount() - 1);
 				
 				PathfinderMob mob = (PathfinderMob) event.getTarget();
 				EntityUtil.makeEntityViolent(mob);
+				event.getPlayer().level.playSound(null, mob.blockPosition(), SoundEvents.ITEM_PICKUP, SoundSource.PLAYERS, 1f, 0f);
 				
 				event.setCancellationResult(InteractionResult.SUCCESS);
 			}

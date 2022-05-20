@@ -5,6 +5,7 @@ import de.budschie.untitledtrollmod.caps.aggressive_animal.IAggressiveAnimal;
 import net.minecraft.network.chat.TextComponent;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.PathfinderMob;
 import net.minecraftforge.common.util.LazyOptional;
 
@@ -24,5 +25,16 @@ public class EntityUtil
 			
 			aggressiveAnimal.resolve().get().setAggressive(true);
 		}
+	}
+	
+	/** Returns whether the given entity is violent or not. **/
+	public static boolean isViolent(Entity entity)
+	{
+		LazyOptional<IAggressiveAnimal> aggressiveAnimal = entity.getCapability(AggressiveAnimalProvider.CAP);
+		
+		if(aggressiveAnimal.isPresent())
+			return aggressiveAnimal.resolve().get().isAggressive();
+		
+		return false;
 	}
 }
