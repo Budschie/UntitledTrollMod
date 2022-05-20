@@ -126,17 +126,23 @@ public class RocketCreeper extends Creeper
 			spawnClouds(-movement.x, -movement.y, -movement.z, 20, movement.scale(-1));
 			
 			this.currentHomingDirection = movement;
-			this.setDeltaMovement(movement.scale(2f));
+			this.setDeltaMovement(movement.scale(1.5f));
 			
 			ProjectileUtil.rotateTowardsMovement(this, 0.35f);
 			
-//			if(distance.lengthSqr() < (7 * 7))
-//				this.ignite();
+			if(distance.lengthSqr() < (10 * 10))
+				this.ignite();
 			
 			break;
 			
 		default:
 		}
+	}
+	
+	@Override
+	public boolean requiresCustomPersistence()
+	{
+		return super.requiresCustomPersistence() || getRocketCreeperState() != RocketCreeperState.DEFAULT;
 	}
 	
 	@Override
