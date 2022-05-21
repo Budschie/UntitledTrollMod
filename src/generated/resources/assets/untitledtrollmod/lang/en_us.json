@@ -1,5 +1,6 @@
 {
   "block.untitledtrollmod.blocking_air": "Blocking Air",
+  "block.untitledtrollmod.troll_tnt": "Troll TNT",
   "effect.untitledtrollmod.jesus_juice_effect": "Jesus",
   "entity.untitledtrollmod.rocket_creeper": "Rocket Creeper",
   "entity.untitledtrollmod.sheep_hopper": "Sheep Hopper",
@@ -10,6 +11,8 @@
   "item.minecraft.potion.effect.long_jesus_juice": "Long Jesus Juice",
   "item.minecraft.splash_potion.effect.jesus_juice": "Splashable Jesus Juice",
   "item.minecraft.splash_potion.effect.long_jesus_juice": "Splashable Long Jesus Juice",
+  "item.untitledtrollmod.troll_arrow": "Troll Arrow",
+  "item.untitledtrollmod.troll_bow": "Troll Bow",
   "item.untitledtrollmod.universal_air_remover": "Universal Air Remover",
   "item.untitledtrollmod.xray_headset": "X-Ray Headset"
 }
