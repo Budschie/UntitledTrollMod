@@ -15,16 +15,25 @@ public class FakeBlock extends Block
 	
 	public FakeBlock(Supplier<Block> sourceBlock)
 	{
-		super(sourceBlock.get().properties);
+		super(removeToolRequirement(sourceBlock.get()));
 		
 		this.sourceBlock = sourceBlock;
 	}
 	
 	public FakeBlock(Supplier<Block> sourceBlock, float strength)
 	{
-		super(Properties.copy(sourceBlock.get()).strength(strength));
+		super(removeToolRequirement(sourceBlock.get()).strength(strength));
 		
 		this.sourceBlock = sourceBlock;
+	}
+	
+	// Returns a copied property with removed tool requirement
+	private static Properties removeToolRequirement(Block fromBlock)
+	{
+		Properties prop = Properties.copy(fromBlock);
+		prop.requiresCorrectToolForDrops = false;
+		
+		return prop;
 	}
 	
 	@Override
