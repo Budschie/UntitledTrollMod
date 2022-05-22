@@ -24,11 +24,11 @@ public class BlockRegistry
 	public static final RegistryObject<FakeBlock> FAKE_DIRT = REGISTRY.register("dirt", () -> new FakeBlock(() -> Blocks.DIRT));
 	public static final RegistryObject<FakeBlock> FAKE_FARMLAND = REGISTRY.register("farmland", () -> new FakeBlock(() -> Blocks.FARMLAND));
 	public static final RegistryObject<FakeBlock> FAKE_TNT = REGISTRY.register("tnt", () -> new FakeBlock(() -> Blocks.TNT));
-	public static final RegistryObject<FakeBlock> FAKE_CRAFTING_TABLE = REGISTRY.register("crafting_table", () -> new FakeBlock(() -> Blocks.CRAFTING_TABLE));
-	public static final RegistryObject<FakeBlock> FAKE_BEDROCK = REGISTRY.register("bedrock", () -> new FakeBlock(() -> Blocks.BEDROCK, 1.0f));
-	public static final RegistryObject<FakeBlock> FAKE_OBSIDIAN = REGISTRY.register("obsidian", () -> new FakeBlock(() -> Blocks.OBSIDIAN, 2.0f));
-	public static final RegistryObject<FakeBlock> FAKE_NETHERITE_BLOCK = REGISTRY.register("netherite_block", () -> new FakeBlock(() -> Blocks.NETHERITE_BLOCK));
-	public static final RegistryObject<FakeBlock> FAKE_ANCIENT_DEBRIS = REGISTRY.register("ancient_debris", () -> new FakeBlock(() -> Blocks.ANCIENT_DEBRIS));
-	public static final RegistryObject<FakeBlock> FAKE_DIAMOND_BLOCK = REGISTRY.register("diamond_block", () -> new FakeBlock(() -> Blocks.DIAMOND_BLOCK, 1.0f));
+	public static final RegistryObject<FakeBlock> FAKE_CRAFTING_TABLE = REGISTRY.register("crafting_table", () -> new FakeBlock(() -> Blocks.CRAFTING_TABLE, 0.5f));
+	public static final RegistryObject<FakeBlock> FAKE_BEDROCK = REGISTRY.register("bedrock", () -> new FakeBlock(() -> Blocks.BEDROCK, 0.5f));
+	public static final RegistryObject<FakeBlock> FAKE_OBSIDIAN = REGISTRY.register("obsidian", () -> new FakeBlock(() -> Blocks.OBSIDIAN, 0.5f));
+	public static final RegistryObject<FakeBlock> FAKE_NETHERITE_BLOCK = REGISTRY.register("netherite_block", () -> new FakeBlock(() -> Blocks.NETHERITE_BLOCK, 0.5f));
+	public static final RegistryObject<FakeBlock> FAKE_ANCIENT_DEBRIS = REGISTRY.register("ancient_debris", () -> new FakeBlock(() -> Blocks.ANCIENT_DEBRIS, 0.5f));
+	public static final RegistryObject<FakeBlock> FAKE_DIAMOND_BLOCK = REGISTRY.register("diamond_block", () -> new FakeBlock(() -> Blocks.DIAMOND_BLOCK, 0.5f));
 
 }
