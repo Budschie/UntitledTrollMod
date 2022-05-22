@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "untitledtrollmod:item/universal_air_remover"
+  }
+}

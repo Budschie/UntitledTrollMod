@@ -18,6 +18,13 @@ public class ItemModelDataProvider extends ItemModelProvider
 	@Override
 	protected void registerModels()
 	{
-		singleTexture("xray_headset", GENERATED, "layer0", new ResourceLocation(UntitledMainClass.MODID, "item/xray_headset"));
+		singleTextureDefault("xray_headset");
+		singleTextureDefault("universal_air_remover");
+		singleTextureDefault("anti_gravitational_device");
+	}
+	
+	private void singleTextureDefault(String name)
+	{
+		singleTexture(name, GENERATED, "layer0", new ResourceLocation(UntitledMainClass.MODID, "item/" + name));
 	}
 }

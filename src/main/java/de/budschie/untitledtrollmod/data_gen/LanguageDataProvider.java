@@ -25,6 +25,10 @@ public class LanguageDataProvider extends LanguageProvider
 		addItem(() -> ItemRegistry.UNIVERSAL_AIR_REMOVER.get(), "Universal Air Remover");
 		addItem(() -> ItemRegistry.TROLL_ARROW.get(), "Troll Arrow");
 		addItem(() -> ItemRegistry.TROLL_BOW.get(), "Troll Bow");
+		addItem(() -> ItemRegistry.ANTI_GRAVITATIONAL_DEVICE.get(), "Anti-gravitational device");
+		
+		// Add hover name for the anti gravitational device
+		add(ItemRegistry.ANTI_GRAVITATIONAL_DEVICE.get().getDescriptionId() + ".hover", "This may look like a simple balloon but it's bleeding edge technology.");
 		
 		addBlock(() -> BlockRegistry.BLOCKING_AIR.get(), "Blocking Air");
 		addBlock(() -> BlockRegistry.TROLL_TNT.get(), "Troll TNT");
