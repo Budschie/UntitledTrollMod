@@ -24,12 +24,15 @@ import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.AgeableMob;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.entity.PathfinderMob;
 import net.minecraft.world.entity.Pose;
 import net.minecraft.world.entity.animal.Sheep;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.level.biome.Biome.BiomeCategory;
+import net.minecraft.world.level.biome.MobSpawnSettings.SpawnerData;
 import net.minecraft.world.level.chunk.LevelChunk;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
@@ -40,6 +43,8 @@ import net.minecraftforge.event.TickEvent.PlayerTickEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
+import net.minecraftforge.event.world.BiomeLoadingEvent;
+import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.LogicalSide;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
@@ -119,6 +124,14 @@ public class Events
 		
 		if(cap.getCrouchLockedTicks() == 0 && player.getForcedPose() == Pose.STANDING)
 			player.setForcedPose(null);
+	}
+	
+	@SubscribeEvent(priority = EventPriority.HIGH)
+	public static void onLoadedBiome(BiomeLoadingEvent event)
+	{		
+		if (event.getCategory() != BiomeCategory.NONE && event.getCategory() != BiomeCategory.NETHER && event.getCategory() != BiomeCategory.THEEND
+				&& event.getCategory() != BiomeCategory.UNDERGROUND && event.getCategory() != BiomeCategory.MUSHROOM && event.getCategory() != BiomeCategory.OCEAN)
+			event.getSpawns().addSpawn(MobCategory.MONSTER, new SpawnerData(EntityRegistry.ROCKET_CREEPER.get(), 5, 1, 1));
 	}
 	
 	/** This event handles the hopper sheep creation and the right clicking of certain entities with a stick **/
