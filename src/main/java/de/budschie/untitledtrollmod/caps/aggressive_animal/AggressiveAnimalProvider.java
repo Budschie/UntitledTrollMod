@@ -4,18 +4,20 @@ import de.budschie.untitledtrollmod.main.UntitledMainClass;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.ByteTag;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.PathfinderMob;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.CapabilityManager;
 import net.minecraftforge.common.capabilities.CapabilityToken;
 import net.minecraftforge.common.capabilities.ICapabilitySerializable;
 import net.minecraftforge.common.util.LazyOptional;
+import net.minecraftforge.event.entity.EntityJoinWorldEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 
+@EventBusSubscriber
 public class AggressiveAnimalProvider implements ICapabilitySerializable<ByteTag>
 {
 	public static final ResourceLocation CAP_NAME = new ResourceLocation(UntitledMainClass.MODID, "aggressive_animal");
-	
 	public static final Capability<IAggressiveAnimal> CAP = CapabilityManager.get(new CapabilityToken<>(){});
 	
 	private PathfinderMob owner;
@@ -42,6 +44,21 @@ public class AggressiveAnimalProvider implements ICapabilitySerializable<ByteTag
 	@Override
 	public void deserializeNBT(ByteTag nbt)
 	{
-		capInstance.resolve().get().setAggressive(nbt.getAsByte() == 1);
+		capInstance.resolve().get().setAggressive(nbt.getAsByte() == 1, true);
+	}
+	
+	@SubscribeEvent
+	public static void onJoinEntity(EntityJoinWorldEvent event)
+	{
+		if(!event.loadedFromDisk())
+			return;
+		
+		event.getEntity().getCapability(CAP).ifPresent(cap ->
+		{
+			if(cap.isAggressive())
+			{
+				cap.registerAggressiveGoals();
+			}
+		});
 	}
 }

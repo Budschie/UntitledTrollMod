@@ -10,6 +10,7 @@ public class AggressiveAnimal implements IAggressiveAnimal
 {
 	private boolean aggressive = false;
 	private PathfinderMob owner;
+	private boolean registeredAggressiveGoals = false;
 	
 	LazyOptional<MeleeAttackGoal> attackGoal;
 	LazyOptional<NearestAttackableTargetGoal<Player>> nearestAttackableGoal;
@@ -28,7 +29,7 @@ public class AggressiveAnimal implements IAggressiveAnimal
 	}
 
 	@Override
-	public void setAggressive(boolean value)
+	public void setAggressive(boolean value, boolean isLoadingWorld)
 	{
 		if(aggressive != value)
 		{
@@ -36,8 +37,10 @@ public class AggressiveAnimal implements IAggressiveAnimal
 			
 			if(value)
 			{
-				owner.goalSelector.addGoal(-1, attackGoal.resolve().get());
-				owner.targetSelector.addGoal(-1, nearestAttackableGoal.resolve().get());
+				if(!isLoadingWorld)
+				{
+					registerAggressiveGoals();
+				}
 			}
 			else
 			{
@@ -46,6 +49,8 @@ public class AggressiveAnimal implements IAggressiveAnimal
 				
 				// Reset optionals to not waste memory
 				setupOptionals();
+				
+				registeredAggressiveGoals = false;
 			}
 		}
 	}
@@ -54,5 +59,17 @@ public class AggressiveAnimal implements IAggressiveAnimal
 	{
 		attackGoal = LazyOptional.of(() -> new MeleeAttackGoal(owner, 2.0D, true));
 		nearestAttackableGoal = LazyOptional.of(() -> new NearestAttackableTargetGoal<>(owner, Player.class, false));
+	}
+	
+	@Override
+	public void registerAggressiveGoals()
+	{
+		if(!registeredAggressiveGoals)
+		{
+			owner.goalSelector.addGoal(-1, attackGoal.resolve().get());
+			owner.targetSelector.addGoal(-1, nearestAttackableGoal.resolve().get());
+			
+			registeredAggressiveGoals = true;
+		}
 	}
 }

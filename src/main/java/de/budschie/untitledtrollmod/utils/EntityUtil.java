@@ -23,7 +23,7 @@ public class EntityUtil
 			
 			pathfinderMob.level.playSound(null, pathfinderMob.getX(), pathfinderMob.getY(), pathfinderMob.getZ(), Accessors.getAmbientSound(pathfinderMob), SoundSource.HOSTILE, 2, 0);
 			
-			aggressiveAnimal.resolve().get().setAggressive(true);
+			aggressiveAnimal.resolve().get().setAggressive(true, false);
 		}
 	}
 	
