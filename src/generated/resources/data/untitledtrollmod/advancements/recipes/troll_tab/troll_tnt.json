@@ -1,0 +1,47 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "untitledtrollmod:troll_tnt"
+    ]
+  },
+  "criteria": {
+    "has_tnt": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "minecraft:tnt"
+            ]
+          }
+        ]
+      }
+    },
+    "has_troll_substance": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "untitledtrollmod:troll_substance"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "untitledtrollmod:troll_tnt"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_tnt",
+      "has_troll_substance",
+      "has_the_recipe"
+    ]
+  ]
+}

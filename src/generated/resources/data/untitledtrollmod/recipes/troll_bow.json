@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " SI",
+    "S I",
+    " SI"
+  ],
+  "key": {
+    "I": {
+      "item": "minecraft:stick"
+    },
+    "S": {
+      "item": "minecraft:string"
+    }
+  },
+  "result": {
+    "item": "untitledtrollmod:troll_bow"
+  }
+}

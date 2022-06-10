@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "untitledtrollmod:troll_substance"
+    ]
+  },
+  "criteria": {
+    "has_tag_minecraft_wool": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "minecraft:wool"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "untitledtrollmod:troll_substance"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_tag_minecraft_wool",
+      "has_the_recipe"
+    ]
+  ]
+}

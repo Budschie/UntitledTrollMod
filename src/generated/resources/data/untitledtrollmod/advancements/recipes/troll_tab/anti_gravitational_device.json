@@ -1,0 +1,47 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "untitledtrollmod:anti_gravitational_device"
+    ]
+  },
+  "criteria": {
+    "has_red_wool": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "minecraft:red_wool"
+            ]
+          }
+        ]
+      }
+    },
+    "has_blocking_air": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "untitledtrollmod:blocking_air"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "untitledtrollmod:anti_gravitational_device"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_red_wool",
+      "has_blocking_air",
+      "has_the_recipe"
+    ]
+  ]
+}

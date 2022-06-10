@@ -66,10 +66,11 @@ public class ModLootTableProvider extends LootTableProvider
 			dropSelf(BlockRegistry.FAKE_CRAFTING_TABLE.get());
 			dropSelf(BlockRegistry.FAKE_DIAMOND_BLOCK.get());
 			dropSelf(BlockRegistry.FAKE_DIRT.get());
-			dropSelf(BlockRegistry.FAKE_FARMLAND.get());
+			dropOther(BlockRegistry.FAKE_FARMLAND.get(), BlockRegistry.FAKE_DIRT.get());
 			dropSelf(BlockRegistry.FAKE_NETHERITE_BLOCK.get());
 			dropSelf(BlockRegistry.FAKE_OBSIDIAN.get());
 			dropSelf(BlockRegistry.FAKE_TNT.get());
+			dropOther(BlockRegistry.FAKE_GRASS_BLOCK.get(), BlockRegistry.FAKE_DIRT.get());
 			
 			add(BlockRegistry.TROLL_TNT.get(), noDrop());
 			add(BlockRegistry.BLOCKING_AIR.get(), noDrop());

@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "TRT",
+    "GIG",
+    "III"
+  ],
+  "key": {
+    "G": {
+      "item": "minecraft:light_blue_stained_glass_pane"
+    },
+    "R": {
+      "item": "minecraft:redstone"
+    },
+    "T": {
+      "item": "minecraft:redstone_torch"
+    },
+    "I": {
+      "item": "minecraft:iron_ingot"
+    }
+  },
+  "result": {
+    "item": "untitledtrollmod:xray_headset"
+  }
+}

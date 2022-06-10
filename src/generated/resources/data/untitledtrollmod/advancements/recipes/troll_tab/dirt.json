@@ -1,0 +1,47 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "untitledtrollmod:dirt"
+    ]
+  },
+  "criteria": {
+    "has_brown_wool": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "minecraft:brown_wool"
+            ]
+          }
+        ]
+      }
+    },
+    "has_troll_substance": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "untitledtrollmod:troll_substance"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "untitledtrollmod:dirt"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_brown_wool",
+      "has_troll_substance",
+      "has_the_recipe"
+    ]
+  ]
+}

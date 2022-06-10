@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "YYY",
+    "WYW",
+    "LRL"
+  ],
+  "key": {
+    "Y": {
+      "item": "minecraft:yellow_wool"
+    },
+    "W": {
+      "item": "minecraft:white_wool"
+    },
+    "L": {
+      "item": "minecraft:light_blue_wool"
+    },
+    "R": {
+      "item": "minecraft:red_wool"
+    }
+  },
+  "result": {
+    "item": "untitledtrollmod:troll_substance",
+    "count": 9
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "untitledtrollmod:dirt"
+    },
+    {
+      "tag": "untitledtrollmod:hoes"
+    }
+  ],
+  "result": {
+    "item": "untitledtrollmod:farmland"
+  }
+}
