@@ -9,6 +9,7 @@ import de.budschie.untitledtrollmod.effects.PotionRegistry;
 import de.budschie.untitledtrollmod.entities.EntityRegistry;
 import de.budschie.untitledtrollmod.items.ItemRegistry;
 import de.budschie.untitledtrollmod.networking.MainNetworkChannel;
+import de.budschie.untitledtrollmod.recipes.RecipeRegistries;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.ai.attributes.Attributes;
@@ -41,6 +42,7 @@ public class UntitledMainClass
 		BlockRegistry.REGISTRY.register(FMLJavaModLoadingContext.get().getModEventBus());
 		MobEffectRegistry.REGISTRY.register(FMLJavaModLoadingContext.get().getModEventBus());
 		PotionRegistry.REGISTRY.register(FMLJavaModLoadingContext.get().getModEventBus());
+		RecipeRegistries.RECIPE_SERIALIZERS.register(FMLJavaModLoadingContext.get().getModEventBus());
 	}
 	
 	@SubscribeEvent
