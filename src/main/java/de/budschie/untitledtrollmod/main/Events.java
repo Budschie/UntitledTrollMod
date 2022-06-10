@@ -88,7 +88,7 @@ public class Events
 		ICrouchLock cap = capOpt.resolve().get();
 		
 		// Set cap to enabled and lock
-		if (cap.getCrouchLockedTicks() == -1 && event.player.getRandom().nextInt(90) == 0 && event.side == LogicalSide.SERVER && event.player.getInventory().hasAnyOf(CROUCH_LOCK_CRITERIUM.resolve().get()))
+		if (cap.getCrouchLockedTicks() == -1 && event.player.getRandom().nextInt(500) == 0 && event.side == LogicalSide.SERVER && event.player.getInventory().hasAnyOf(CROUCH_LOCK_CRITERIUM.resolve().get()))
 		{
 			int ticksToCrouchLock = event.player.getRandom().nextInt(30) + 100;
 
