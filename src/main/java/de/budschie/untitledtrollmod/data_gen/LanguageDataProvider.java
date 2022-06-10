@@ -23,7 +23,7 @@ public class LanguageDataProvider extends LanguageProvider
 	{
 		addItem(() -> ItemRegistry.XRAY_HEADSET.get(), "X-Ray Headset");
 		addItem(() -> ItemRegistry.UNIVERSAL_AIR_REMOVER.get(), "Universal Air Remover");
-		addItem(() -> ItemRegistry.TROLL_ARROW.get(), "Troll Arrow");
+		addItem(() -> ItemRegistry.TROLL_SUBSTANCE.get(), "Troll Substance");
 		addItem(() -> ItemRegistry.TROLL_BOW.get(), "Troll Bow");
 		addItem(() -> ItemRegistry.ANTI_GRAVITATIONAL_DEVICE.get(), "Anti-gravitational device");
 		

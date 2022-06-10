@@ -20,7 +20,7 @@ public class TrollBowItem extends BowItem
 	@Override
 	public Predicate<ItemStack> getAllSupportedProjectiles()
 	{
-		return stack -> stack.getItem() == ItemRegistry.TROLL_ARROW.get();
+		return stack -> stack.getItem() == ItemRegistry.TROLL_SUBSTANCE.get();
 	}
 	
 	@Override

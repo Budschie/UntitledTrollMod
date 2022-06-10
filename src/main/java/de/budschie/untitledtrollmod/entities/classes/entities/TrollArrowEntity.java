@@ -16,7 +16,7 @@ import net.minecraftforge.network.PacketDistributor;
 
 public class TrollArrowEntity extends AbstractArrow implements ItemSupplier
 {
-	private static final LazyOptional<ItemStack> ITEM_TO_DISPLAY = LazyOptional.of(() -> new ItemStack(ItemRegistry.TROLL_ARROW.get()));
+	private static final LazyOptional<ItemStack> ITEM_TO_DISPLAY = LazyOptional.of(() -> new ItemStack(ItemRegistry.TROLL_SUBSTANCE.get()));
 		
 	public TrollArrowEntity(Level level)
 	{
@@ -31,7 +31,7 @@ public class TrollArrowEntity extends AbstractArrow implements ItemSupplier
 	@Override
 	protected ItemStack getPickupItem()
 	{
-		return new ItemStack(ItemRegistry.TROLL_ARROW.get(), 1);
+		return new ItemStack(ItemRegistry.TROLL_SUBSTANCE.get(), 1);
 	}
 
 	@Override

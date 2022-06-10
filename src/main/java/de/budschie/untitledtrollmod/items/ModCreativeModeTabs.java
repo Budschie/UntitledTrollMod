@@ -10,7 +10,7 @@ public class ModCreativeModeTabs
 		@Override
 		public ItemStack makeIcon()
 		{
-			return new ItemStack(ItemRegistry.TROLL_ARROW.get());
+			return new ItemStack(ItemRegistry.TROLL_SUBSTANCE.get());
 		}
 	};
 }

@@ -7,10 +7,10 @@ import net.minecraft.world.item.ArrowItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 
-public class TrollArrowItem extends ArrowItem
+public class TrollSubstanceItem extends ArrowItem
 {
 
-	public TrollArrowItem(Properties properties)
+	public TrollSubstanceItem(Properties properties)
 	{
 		super(properties);
 	}
