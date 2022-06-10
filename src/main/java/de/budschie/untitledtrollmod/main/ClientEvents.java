@@ -7,12 +7,14 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Vector4f;
 
+import de.budschie.untitledtrollmod.blocks.BlockRegistry;
 import de.budschie.untitledtrollmod.caps.fake_xray.FakeXrayProvider;
 import de.budschie.untitledtrollmod.caps.fake_xray.IFakeXray;
 import de.budschie.untitledtrollmod.caps.fake_xray.IFakeXray.FakeOre;
 import de.budschie.untitledtrollmod.items.ItemRegistry;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
+import net.minecraft.client.renderer.BiomeColors;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.block.BlockRenderDispatcher;
@@ -22,13 +24,17 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.level.BlockAndTintGetter;
 import net.minecraft.world.level.ChunkPos;
+import net.minecraft.world.level.GrassColor;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.chunk.LevelChunk;
 import net.minecraft.world.level.levelgen.XoroshiroRandomSource;
 import net.minecraft.world.level.levelgen.synth.NormalNoise;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.client.event.ColorHandlerEvent;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.client.event.RenderGameOverlayEvent.ElementType;
 import net.minecraftforge.client.event.RenderLevelLastEvent;
@@ -43,6 +49,25 @@ public class ClientEvents
 	public static final int RADIUS = 2;
 	
 	private static final NormalNoise FAKE_NOISE = NormalNoise.create(new XoroshiroRandomSource(2145445), 2, 0.5d, 0.5d);
+	
+	@SubscribeEvent
+	public static void onRegisterBlockColors(ColorHandlerEvent.Block event)
+	{
+		event.getBlockColors().register((blockstate, level, pos, tintIndex) ->
+		{
+			return level != null && pos != null ? BiomeColors.getAverageGrassColor(level, pos) : GrassColor.get(0.5D, 1.0D);
+		}, BlockRegistry.FAKE_GRASS_BLOCK.get());
+	}
+	
+	@SubscribeEvent
+	public static void onRegisterItemColors(ColorHandlerEvent.Item event)
+	{
+		event.getItemColors().register((itemStack, tintIndex) ->
+		{
+			BlockState blockstate = ((BlockItem) itemStack.getItem()).getBlock().defaultBlockState();
+			return event.getBlockColors().getColor(blockstate, (BlockAndTintGetter) null, (BlockPos) null, tintIndex);
+		}, ItemRegistry.FAKE_GRASS_BLOCK.get());
+	}
 	
 	@SubscribeEvent
 	public static void onRenderGui(RenderGameOverlayEvent.Pre event)

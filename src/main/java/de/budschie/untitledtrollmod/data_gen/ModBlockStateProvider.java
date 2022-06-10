@@ -27,6 +27,7 @@ public class ModBlockStateProvider extends BlockStateProvider
 	{
 		blockWithItem(BlockRegistry.BLOCKING_AIR.get());
 		
+		fakeBlockWithItem(BlockRegistry.FAKE_GRASS_BLOCK.get());
 		fakeBlockWithItem(BlockRegistry.FAKE_DIRT.get());
 		fakeBlockWithItem(BlockRegistry.FAKE_FARMLAND.get());
 		fakeBlockWithItem(BlockRegistry.FAKE_TNT.get());

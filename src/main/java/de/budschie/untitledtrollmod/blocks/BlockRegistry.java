@@ -21,6 +21,7 @@ public class BlockRegistry
 	public static final RegistryObject<Block> BLOCKING_AIR = REGISTRY.register("blocking_air", () -> new BlockingAir(Properties.of(Material.STONE).sound(SoundType.STONE).noOcclusion().strength(-1, 0)));
 	
 	// Fake blocks. Look like the real block, but cannot be easily mined and they are useless, eg fake dirt cannot be converted to farmland
+	public static final RegistryObject<FakeBlock> FAKE_GRASS_BLOCK = REGISTRY.register("grass_block", () -> new FakeBlock(() -> Blocks.GRASS_BLOCK));
 	public static final RegistryObject<FakeBlock> FAKE_DIRT = REGISTRY.register("dirt", () -> new FakeBlock(() -> Blocks.DIRT));
 	public static final RegistryObject<FakeBlock> FAKE_FARMLAND = REGISTRY.register("farmland", () -> new FakeBlock(() -> Blocks.FARMLAND));
 	public static final RegistryObject<FakeBlock> FAKE_TNT = REGISTRY.register("tnt", () -> new FakeBlock(() -> Blocks.TNT));

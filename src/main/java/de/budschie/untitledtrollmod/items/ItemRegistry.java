@@ -26,7 +26,10 @@ public class ItemRegistry
 	public static final RegistryObject<Item> TROLL_TNT = REGISTRY.register("troll_tnt", () -> new BlockItem(BlockRegistry.TROLL_TNT.get(), new Item.Properties().tab(ModCreativeModeTabs.TROLL_TAB)));
 	public static final RegistryObject<Item> BLOCKING_AIR = REGISTRY.register("blocking_air", () -> new BlockItem(BlockRegistry.BLOCKING_AIR.get(), new Item.Properties().tab(ModCreativeModeTabs.TROLL_TAB)));
 	
+	public static final RegistryObject<Item> FAKE_GRASS_BLOCK = REGISTRY.register("grass_block", () -> new BlockItem(BlockRegistry.FAKE_GRASS_BLOCK.get(), new Item.Properties().tab(ModCreativeModeTabs.TROLL_TAB)));
+	// 
 	public static final RegistryObject<Item> FAKE_DIRT = REGISTRY.register("dirt", () -> new BlockItem(BlockRegistry.FAKE_DIRT.get(), new Item.Properties().tab(ModCreativeModeTabs.TROLL_TAB)));
+	//
 	public static final RegistryObject<Item> FAKE_FARMLAND = REGISTRY.register("farmland", () -> new BlockItem(BlockRegistry.FAKE_FARMLAND.get(), new Item.Properties().tab(ModCreativeModeTabs.TROLL_TAB)));
 	public static final RegistryObject<Item> FAKE_TNT = REGISTRY.register("tnt", () -> new BlockItem(BlockRegistry.FAKE_TNT.get(), new Item.Properties().tab(ModCreativeModeTabs.TROLL_TAB)));
 	public static final RegistryObject<Item> FAKE_CRAFTING_TABLE = REGISTRY.register("crafting_table", () -> new BlockItem(BlockRegistry.FAKE_CRAFTING_TABLE.get(), new Item.Properties().tab(ModCreativeModeTabs.TROLL_TAB)));
