@@ -16,6 +16,7 @@ public class DataGathering
 		event.getGenerator().addProvider(new LanguageDataProvider(event.getGenerator(), UntitledMainClass.MODID, "en_us"));
 		event.getGenerator().addProvider(new ModBlockStateProvider(event.getGenerator(), UntitledMainClass.MODID, event.getExistingFileHelper()));
 		event.getGenerator().addProvider(new ModLootTableProvider(event.getGenerator()));
-
+		event.getGenerator().addProvider(new CraftingRecipeProvider(event.getGenerator()));
+		event.getGenerator().addProvider(new ItemTagProvider(event.getGenerator(), event.getExistingFileHelper()));
 	}
 }
