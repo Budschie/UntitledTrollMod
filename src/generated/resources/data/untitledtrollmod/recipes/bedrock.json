@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "DLD",
+    "LTL",
+    "DLD"
+  ],
+  "key": {
+    "L": {
+      "item": "minecraft:light_gray_wool"
+    },
+    "D": {
+      "item": "minecraft:gray_wool"
+    },
+    "T": {
+      "item": "untitledtrollmod:troll_substance"
+    }
+  },
+  "result": {
+    "item": "untitledtrollmod:bedrock",
+    "count": 8
+  }
+}

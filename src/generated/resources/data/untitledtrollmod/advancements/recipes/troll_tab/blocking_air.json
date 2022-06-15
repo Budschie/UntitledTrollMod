@@ -6,18 +6,6 @@
     ]
   },
   "criteria": {
-    "has_glass": {
-      "trigger": "minecraft:inventory_changed",
-      "conditions": {
-        "items": [
-          {
-            "items": [
-              "minecraft:glass"
-            ]
-          }
-        ]
-      }
-    },
     "has_troll_substance": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
@@ -39,7 +27,6 @@
   },
   "requirements": [
     [
-      "has_glass",
       "has_troll_substance",
       "has_the_recipe"
     ]

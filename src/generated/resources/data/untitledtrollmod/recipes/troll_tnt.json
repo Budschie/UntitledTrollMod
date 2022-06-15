@@ -1,20 +1,23 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
-    "OOO",
-    "OIO",
-    "OOO"
+    "ETE",
+    "ERE",
+    "EEE"
   ],
   "key": {
-    "O": {
+    "E": {
       "item": "minecraft:tnt"
     },
-    "I": {
+    "T": {
       "item": "untitledtrollmod:troll_substance"
+    },
+    "R": {
+      "item": "minecraft:rotten_flesh"
     }
   },
   "result": {
     "item": "untitledtrollmod:troll_tnt",
-    "count": 8
+    "count": 7
   }
 }

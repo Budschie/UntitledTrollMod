@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "WWW",
+    "WTW",
+    "WWW"
+  ],
+  "key": {
+    "W": {
+      "tag": "minecraft:planks"
+    },
+    "T": {
+      "item": "untitledtrollmod:troll_substance"
+    }
+  },
+  "result": {
+    "item": "untitledtrollmod:crafting_table",
+    "count": 2
+  }
+}

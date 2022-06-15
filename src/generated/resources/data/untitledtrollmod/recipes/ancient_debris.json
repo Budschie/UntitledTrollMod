@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "DLD",
+    "LTL",
+    "DLD"
+  ],
+  "key": {
+    "L": {
+      "item": "minecraft:netherrack"
+    },
+    "D": {
+      "item": "minecraft:brown_dye"
+    },
+    "T": {
+      "item": "untitledtrollmod:troll_substance"
+    }
+  },
+  "result": {
+    "item": "untitledtrollmod:ancient_debris",
+    "count": 8
+  }
+}

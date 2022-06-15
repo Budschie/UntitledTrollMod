@@ -6,18 +6,6 @@
     ]
   },
   "criteria": {
-    "has_red_wool": {
-      "trigger": "minecraft:inventory_changed",
-      "conditions": {
-        "items": [
-          {
-            "items": [
-              "minecraft:red_wool"
-            ]
-          }
-        ]
-      }
-    },
     "has_blocking_air": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
@@ -39,7 +27,6 @@
   },
   "requirements": [
     [
-      "has_red_wool",
       "has_blocking_air",
       "has_the_recipe"
     ]

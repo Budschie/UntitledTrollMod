@@ -4,13 +4,11 @@ import java.util.function.Consumer;
 
 import de.budschie.untitledtrollmod.items.ItemRegistry;
 import de.budschie.untitledtrollmod.recipes.HoeRecipe.HoeRecipeBuilder;
-import de.budschie.untitledtrollmod.tags.ModItemTags;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.data.recipes.RecipeBuilder;
 import net.minecraft.data.recipes.RecipeProvider;
 import net.minecraft.data.recipes.ShapedRecipeBuilder;
-import net.minecraft.data.recipes.ShapelessRecipeBuilder;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
@@ -28,8 +26,17 @@ public class CraftingRecipeProvider extends RecipeProvider
 	@Override
 	protected void buildCraftingRecipes(Consumer<FinishedRecipe> pFinishedRecipeConsumer)
 	{		
-		circled(pFinishedRecipeConsumer, ItemRegistry.TROLL_TNT.get(), 8, Items.TNT, ItemRegistry.TROLL_SUBSTANCE.get());
-		circled(pFinishedRecipeConsumer, ItemRegistry.BLOCKING_AIR.get(), 8, Items.GLASS, ItemRegistry.TROLL_SUBSTANCE.get());
+		// circled(pFinishedRecipeConsumer, ItemRegistry.TROLL_TNT.get(), 8, Items.TNT, Items.ROTTEN_FLESH, Items.ROTTEN_FLESH);
+		requiresItem(ShapedRecipeBuilder.shaped(ItemRegistry.TROLL_TNT.get(), 7)
+		.define('E', Items.TNT)
+		.define('T', ItemRegistry.TROLL_SUBSTANCE.get())
+		.define('R', Items.ROTTEN_FLESH)
+		.pattern("ETE")
+		.pattern("ERE")
+		.pattern("EEE"), ItemRegistry.TROLL_SUBSTANCE.get())
+		.save(pFinishedRecipeConsumer);
+		
+		circled(pFinishedRecipeConsumer, ItemRegistry.BLOCKING_AIR.get(), 8, Items.GLASS, ItemRegistry.TROLL_SUBSTANCE.get(), ItemRegistry.TROLL_SUBSTANCE.get());
 		
 		requiresItem(ShapedRecipeBuilder.shaped(ItemRegistry.UNIVERSAL_AIR_REMOVER.get())
 		.define('B', Items.IRON_BLOCK)
@@ -41,7 +48,7 @@ public class CraftingRecipeProvider extends RecipeProvider
 		.pattern("I L"), Items.IRON_INGOT, Items.REDSTONE)
 		.save(pFinishedRecipeConsumer);
 		
-		circled(pFinishedRecipeConsumer, ItemRegistry.ANTI_GRAVITATIONAL_DEVICE.get(), 1, Items.RED_WOOL, ItemRegistry.BLOCKING_AIR.get());
+		circled(pFinishedRecipeConsumer, ItemRegistry.ANTI_GRAVITATIONAL_DEVICE.get(), 1, Items.RED_WOOL, ItemRegistry.BLOCKING_AIR.get(), ItemRegistry.BLOCKING_AIR.get());
 		
 		requiresItem(ShapedRecipeBuilder.shaped(ItemRegistry.TROLL_BOW.get())
 		.define('I', Items.STICK)
@@ -71,7 +78,56 @@ public class CraftingRecipeProvider extends RecipeProvider
 		.pattern("LRL"), ItemTags.WOOL)
 		.save(pFinishedRecipeConsumer);
 		
-		circled(pFinishedRecipeConsumer, ItemRegistry.FAKE_DIRT.get(), 8, Items.BROWN_WOOL, ItemRegistry.TROLL_SUBSTANCE.get());
+		circled(pFinishedRecipeConsumer, ItemRegistry.FAKE_DIRT.get(), 8, Items.BROWN_WOOL, ItemRegistry.TROLL_SUBSTANCE.get(), ItemRegistry.TROLL_SUBSTANCE.get());
+		
+		requiresItem(ShapedRecipeBuilder.shaped(ItemRegistry.FAKE_GRASS_BLOCK.get(), 6)
+		.define('G', Items.GREEN_DYE)
+		.define('D', ItemRegistry.FAKE_DIRT.get())
+		.pattern("GGG")
+		.pattern("DDD")
+		.pattern("DDD"), ItemRegistry.FAKE_DIRT.get())
+		.save(pFinishedRecipeConsumer);
+		
+		requiresItem(ShapedRecipeBuilder.shaped(ItemRegistry.FAKE_TNT.get(), 8)
+		.define('R', Items.RED_WOOL)
+		.define('W', Items.WHITE_WOOL)
+		.define('T', ItemRegistry.TROLL_SUBSTANCE.get())
+		.pattern("RRR")
+		.pattern("WTW")
+		.pattern("RRR"), ItemRegistry.TROLL_SUBSTANCE.get())
+		.save(pFinishedRecipeConsumer);
+		
+		requiresItem(ShapedRecipeBuilder.shaped(ItemRegistry.FAKE_CRAFTING_TABLE.get(), 2)
+		.define('W', ItemTags.PLANKS)
+		.define('T', ItemRegistry.TROLL_SUBSTANCE.get())
+		.pattern("WWW")
+		.pattern("WTW")
+		.pattern("WWW"), ItemRegistry.TROLL_SUBSTANCE.get())
+		.save(pFinishedRecipeConsumer);
+		
+		circled(pFinishedRecipeConsumer, ItemRegistry.FAKE_OBSIDIAN.get(), 8, Items.BLACK_WOOL, ItemRegistry.TROLL_SUBSTANCE.get(), ItemRegistry.TROLL_SUBSTANCE.get());
+		
+		requiresItem(ShapedRecipeBuilder.shaped(ItemRegistry.FAKE_BEDROCK.get(), 8)
+		.define('L', Items.LIGHT_GRAY_WOOL)
+		.define('D', Items.GRAY_WOOL)
+		.define('T', ItemRegistry.TROLL_SUBSTANCE.get())
+		.pattern("DLD")
+		.pattern("LTL")
+		.pattern("DLD"), ItemRegistry.TROLL_SUBSTANCE.get())
+		.save(pFinishedRecipeConsumer);
+		
+		circled(pFinishedRecipeConsumer, ItemRegistry.FAKE_NETHERITE_BLOCK.get(), 1, Items.BROWN_DYE, ItemRegistry.FAKE_DIAMOND_BLOCK.get(), ItemRegistry.FAKE_DIAMOND_BLOCK.get());
+		
+		requiresItem(ShapedRecipeBuilder.shaped(ItemRegistry.FAKE_ANCIENT_DEBRIS.get(), 8)
+		.define('L', Items.NETHERRACK)
+		.define('D', Items.BROWN_DYE)
+		.define('T', ItemRegistry.TROLL_SUBSTANCE.get())
+		.pattern("DLD")
+		.pattern("LTL")
+		.pattern("DLD"), ItemRegistry.TROLL_SUBSTANCE.get())
+		.save(pFinishedRecipeConsumer);
+		
+		circled(pFinishedRecipeConsumer, ItemRegistry.FAKE_DIAMOND_BLOCK.get(), 8, Items.CYAN_WOOL, ItemRegistry.TROLL_SUBSTANCE.get(), ItemRegistry.TROLL_SUBSTANCE.get());
 		
 //		requiresTag(requiresItem(ShapelessRecipeBuilder.shapeless(ItemRegistry.FAKE_FARMLAND.get()).requires(ItemRegistry.FAKE_DIRT.get()).requires(ModItemTags.HOES),
 //				ItemRegistry.FAKE_DIRT.get()), ModItemTags.HOES).save(pFinishedRecipeConsumer);
@@ -79,11 +135,11 @@ public class CraftingRecipeProvider extends RecipeProvider
 		HoeRecipeBuilder.create(ItemRegistry.FAKE_FARMLAND.get()).setIngredient(Ingredient.of(ItemRegistry.FAKE_DIRT.get())).save(pFinishedRecipeConsumer);
 	}
 	
-	private void circled(Consumer<FinishedRecipe> pFinishedRecipeConsumer, ItemLike finished, int finCount, ItemLike outerItem, ItemLike innerItem)
+	private void circled(Consumer<FinishedRecipe> pFinishedRecipeConsumer, ItemLike finished, int finCount, ItemLike outerItem, ItemLike innerItem, ItemLike requiredItem)
 	{
 		ShapedRecipeBuilder builder = ShapedRecipeBuilder.shaped(finished, finCount).define('O', outerItem).define('I', innerItem).pattern("OOO").pattern("OIO").pattern("OOO");
 		
-		requiresItem(builder, outerItem, innerItem);
+		requiresItem(builder, requiredItem);
 		
 		builder.save(pFinishedRecipeConsumer);
 	}	

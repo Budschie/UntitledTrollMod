@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "RRR",
+    "WTW",
+    "RRR"
+  ],
+  "key": {
+    "R": {
+      "item": "minecraft:red_wool"
+    },
+    "W": {
+      "item": "minecraft:white_wool"
+    },
+    "T": {
+      "item": "untitledtrollmod:troll_substance"
+    }
+  },
+  "result": {
+    "item": "untitledtrollmod:tnt",
+    "count": 8
+  }
+}

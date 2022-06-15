@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "untitledtrollmod:dirt"
+      "untitledtrollmod:diamond_block"
     ]
   },
   "criteria": {
@@ -21,7 +21,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "untitledtrollmod:dirt"
+        "recipe": "untitledtrollmod:diamond_block"
       }
     }
   },
